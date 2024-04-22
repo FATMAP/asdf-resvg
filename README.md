@@ -1,82 +1,66 @@
-<div align="center">
-
-# asdf-cmake [![Build](https://github.com/asdf-community/asdf-cmake/actions/workflows/build.yml/badge.svg)](https://github.com/asdf-community/asdf-cmake/actions/workflows/build.yml) [![Lint](https://github.com/asdf-community/asdf-cmake/actions/workflows/lint.yml/badge.svg)](https://github.com/asdf-community/asdf-cmake/actions/workflows/lint.yml)
+# asdf-clang-format
 
 
-[cmake](https://cmake.org/documentation) plugin for the [asdf version manager](https://asdf-vm.com).
+A `clang-format` plugin for the [asdf version manager](https://asdf-vm.com).
 
-</div>
 
-This plugin will try to install an [official binary release of CMake](https://github.com/Kitware/CMake/releases), but can also build and install from source if necessary or desired.
+This plugin will try to install a binary build of clang-format from the official LLVM repository.
+Failing that, it will try to build it from source. Building from source can also be forced by
+setting the `ASDF_CLANG_FORMAT_FORCE_SOURCE_INSTALL=1` environment variable.
 
 # Contents
 
 - [Dependencies](#dependencies)
 - [Install](#install)
-- [Contributing](#contributing)
 - [License](#license)
 
 # Dependencies
 
 - `bash`, `curl`, `tar`: generic POSIX utilities.
-- *optional* Qt installation if compiling from source and wanting `cmake-gui`
+- If building from source, a C++ compiler, `cmake`, `make`, etc are required.
 
 # Install
 
 Plugin:
 
 ```shell
-asdf plugin add cmake https://github.com/asdf-community/asdf-cmake.git
+asdf plugin add clang-format https://github.com/FATMAP/asdf-clang-format.git
 ```
 
-cmake:
+clang-format:
 
 ```shell
 # Show all installable versions
-asdf list-all cmake
+asdf list-all clang-format
 
 # Install specific version
-asdf install cmake latest
+asdf install clang-format latest
 
 # Set a version globally (on your ~/.tool-versions file)
-asdf global cmake latest
+asdf global clang-format latest
 
-# Now cmake commands are available
-cmake --version
+# Now clang-format can be invoked from the shell
+clang-format --version
 ```
 
 Check [asdf](https://github.com/asdf-vm/asdf) readme for more instructions on how to
 install & manage versions.
 
-## cmake-gui
-
-Binary installations include `cmake-gui` by default.
-
-If installing from source, and you have Qt installed on your machine you can
-get the cmake-gui program built by providing the path to the Qt binary
-directory in the QTBINDIR environment variable when invoking asdf install
-cmake.
-
-For instance, on a Mac with Qt installed using brew that would be :
-
-QTBINDIR=/usr/local/opt/qt/bin asdf install cmake <version>
 # Configuration
 
-A few environment variables can affect this plugin:
+A following environment variables can affect this plugin:
 
-- `ASDF_CMAKE_FORCE_SOURCE_INSTALL`: Set to `1` to force a source-based installation instead of using a pre-compiled binary, even if a binary release is available.
-- `QTBINDIR`: Set to your Qt installation to build `cmake-gui`, if CMake is being built from source.
+- `ASDF_CLANG_FORMAT_FORCE_SOURCE_INSTALL`: Set to `1` to force a source-based installation instead of using a
+  pre-compiled binary, even if a binary release is available.
 
 # Acknowledgements
 
-The plugin is based on work in [srivathsanmurali/asdf-cmake](https://github.com/srivathsanmurali/asdf-cmake). Many thanks to the original authors of that project.
-
-# Contributing
-
-Contributions of any kind welcome! See the [contributing guide](contributing.md).
-
-[Thanks goes to these contributors](https://github.com/asdf-community/asdf-cmake/graphs/contributors)!
+The plugin is based on work in [asdf-community/asdf-cmake](https://github.com/asdf-community/asdf-cmake).
+Many thanks to the original authors of that project.
 
 # License
 
-See [LICENSE](LICENSE) © [Andy Mroczkowski](https://github.com/amrox/)
+See [LICENSE](LICENSE)
+
+© [Andy Mroczkowski](https://github.com/amrox/)<br>
+© [Strava](https://strava.com/)
