@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+echo <<END
+The resvg tool is used for converting SVGs to PNGs.
+See https://github.com/RazrFalcon/resvg for more info.
+END
