@@ -102,10 +102,16 @@ source_build_install() {
   local src_dir="$1"
   local build_dir="$2"
   local install_path="$3"
+
+  # There supposed to be the ASDF_PLUGIN_PATH env var, but it's missing
+  # for me for some reason. So, instead, let's resolve this file's location.
+  SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
   (
     set -e  # Not sure why, but it doesn't have an effect, so we sprinkle those
             # "|| exit 1" statements.
     cd "${src_dir}" || exit 1
+    cp -f "${SCRIPT_DIR}/../.tool-versions" . || exit 1
     cargo build --release || exit 1
     mkdir -p "${install_path}/bin" || exit 1
     cp -fp "${src_dir}/target/release/resvg" "${install_path}/bin/" || exit 1
